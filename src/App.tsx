@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import "./App.css";
-import { cinemaToday } from './models/bek';
+import { cinemaToday, cinemaFilm } from './models/bek';
 
 
 
@@ -8,23 +8,46 @@ const App = () => {
   const [statestr, setStatestr] = useState('main')
 
   const cinematoday = cinemaToday()
+  const [cinemafilm, setCinemafilm] = useState(cinemaFilm(cinematoday.films[0].id))
 
   const intoFilm = ( id: string ) => {
+    setCinemafilm(cinemaFilm(id))
     setStatestr('film')
-
-    //setRestartTrue(true)
+    console.log(id)
   }
 
   if (statestr == 'main') {
     return (
     <p className = "debuts">
-        <h3>Сегодня в прокате</h3>
+        <h1>POPCORNISSIMO</h1>
+        <h2>Сегодня в прокате</h2>
+        <br></br>
         {cinematoday.films.map(film => 
             <p key={film.name}>
-                <h2>{film.name}</h2>
-                <img src={'https://shift-intensive.ru/api'+film.img} alt=""/>
-                <button onClick={() => intoFilm(film.id)} className="butDeb">подробнее</button>
+                <h3>{film.name}</h3>
+                <td><img className="film" src={'https://shift-intensive.ru/api'+film.img} alt=""/></td>
+                <td valign="top">
+                  <p className='ageR'><span>{film.ageRating}</span> jmhnfgv</p>
+                  {film.description}
+                <br></br>
+                <br></br>
+                  Дата выхода: {film.releaseDate}
+                <br></br>
+                <br></br>
+                  {film.runtime} мин.
+                <br></br>
+                <br></br>
+                  <p className='userR'>
+                    кинопоиск {film.userRatings.kinopoisk}
+                  <br></br>
+                    imdb {film.userRatings.imdb}
+                  </p>
+                <br></br>
+                  
+                </td>
                 
+                <button onClick={() => intoFilm(film.id)} className="butDeb">подробнее</button>
+                <br></br>
             </p>
         )}
     </p>
@@ -32,19 +55,26 @@ const App = () => {
   }
 
   if (statestr == 'film') {
-
-
-
     return (
     <p className = "debuts">
-        <h3>Сегодня в прокате</h3>
-        {cinematoday.films.map(film => 
-            <p key={film.name}>
-                <h2>{film.name}</h2>
-                <img src={'https://shift-intensive.ru/'+film.img} alt=""/>
-                <button onClick={() => intoFilm(film.id)} className="butDeb">подробнее</button>
-            </p>
-        )}
+        <h1>{cinemafilm.film.name}</h1>
+        <td><img className="film" src={'https://shift-intensive.ru/api'+cinemafilm.film.img} alt=""/></td>
+        <td valign="top">
+                  Дата релиза: {cinemafilm.film.releaseDate}
+                <br></br>
+                  Актеры: {cinemafilm.film.actors.map(actor =>
+                    <div key={actor.id} className='actor'>
+                      {actor.professions}: {actor.fullName}
+                    </div>
+                  )}
+                <br></br>
+                  Режисеры:
+                <br></br>
+
+                <br></br>
+                  {cinemafilm.film.description}
+                </td>
+        
     </p>
   );
   }

@@ -41,6 +41,7 @@ export function cinemaToday(): {
       }
     ]
     } {
+
     const xhr = new XMLHttpRequest();
     const url = 'https://shift-intensive.ru/api/cinema/today'; 
 
@@ -59,7 +60,69 @@ export function cinemaToday(): {
 }
 
 
+export function cinemaFilm(id: string): {
+    success: boolean,
+    reason: string,
+    film: 
+      {
+        id: string,
+        name: string,
+        originalName: string,
+        description: string,
+        releaseDate: string,
+        actors: [
+          {
+            id: number,
+            professions: string,
+            fullName: string
+          }
+        ],
+        directors: [
+          {
+            id: number,
+            professions: string,
+            fullName: string
+          }
+        ],
+        runtime: number,
+        ageRating: string,
+        genres: [
+          string
+        ],
+        userRatings: {
+          kinopoisk: number,
+          imdb: number
+        },
+        img: string,
+        country: {
+          name: string,
+          code: string,
+          code2: string,
+          id: number
+        }
+      }
+    } {
+    const xhr = new XMLHttpRequest();
+    const url = 'https://shift-intensive.ru/api/cinema/film/'+id; 
 
+
+    // Создаем объект с данными для отправки
+    
+    //const data = JSON.stringify(requestBody);
+
+    // Инициализируем запрос
+    xhr.open('GET', url, false); // false делает запрос синхронным
+
+    // Устанавливаем заголовок для отправки JSON
+    //xhr.setRequestHeader('Content-Type', 'application/json');
+
+    // Отправляем запрос
+    xhr.send();
+
+        // Возвращаем ответ как строку
+    return JSON.parse(xhr.responseText); // Предполагается, что ответ - это строка
+
+}
 
 
 
