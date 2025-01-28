@@ -45,17 +45,11 @@ export function cinemaToday(): {
     const xhr = new XMLHttpRequest();
     const url = 'https://shift-intensive.ru/api/cinema/today'; 
 
-    // Инициализируем запрос
-    xhr.open('GET', url, false); // false делает запрос синхронным
+    xhr.open('GET', url, false); 
 
-    // Устанавливаем заголовок для токена
-    //xhr.setRequestHeader('token', token); // Используем 'token' вместо 'Authorization'
-
-    // Отправляем запрос
     xhr.send();
 
-        // Парсим ответ в JSON и возвращаем массив объектов
-    return JSON.parse(xhr.responseText); // Предполагается, что ответ - это массив объектов
+    return JSON.parse(xhr.responseText); 
     
 }
 
@@ -105,28 +99,51 @@ export function cinemaFilm(id: string): {
     const xhr = new XMLHttpRequest();
     const url = 'https://shift-intensive.ru/api/cinema/film/'+id; 
 
+    xhr.open('GET', url, false); 
 
-    // Создаем объект с данными для отправки
-    
-    //const data = JSON.stringify(requestBody);
-
-    // Инициализируем запрос
-    xhr.open('GET', url, false); // false делает запрос синхронным
-
-    // Устанавливаем заголовок для отправки JSON
-    //xhr.setRequestHeader('Content-Type', 'application/json');
-
-    // Отправляем запрос
     xhr.send();
 
-        // Возвращаем ответ как строку
-    return JSON.parse(xhr.responseText); // Предполагается, что ответ - это строка
+    return JSON.parse(xhr.responseText); 
 
 }
 
 
 
+export function cinemaTime(id: string): {
+  success: boolean,
+  //reason: string,
+  schedules: [
+    {
+      date: string,
+      seances: [
+        {
+          time: string,
+          hall: {
+            name: string,
+            places: [
+              [
+                {
+                  price: number,
+                  type: string
+                }
+              ]
+            ]
+          }
+        }
+      ]
+    }
+  ]
+} {
+  const xhr = new XMLHttpRequest();
+  const url = 'https://shift-intensive.ru/api/cinema/film/'+id+'/schedule'; 
 
+  xhr.open('GET', url, false); 
+
+  xhr.send();
+
+  return JSON.parse(xhr.responseText); 
+
+}
 
 
 
