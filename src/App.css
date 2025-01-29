@@ -1,0 +1,202 @@
+.film {
+  width: 15vw;
+  margin-top: 25px;
+}
+
+p {
+  color: #ffffff;
+}
+
+div {
+  color: #ffffff;
+}
+
+  .debuts {
+    background-image: 'assets/popcorn.png';
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+
+.debuts {
+    background-image: linear-gradient(to top, rgb(11, 11, 11) 0%, rgba(255, 255, 255, 0) 100%), url(assets/pop3.jpg);
+    height: calc(1100px);
+    padding-left: 400px;
+    padding-right: 400px;
+    padding-top: 200px;
+    background-color: rgb(11, 11, 11);
+}
+
+.bottom {
+  padding-bottom: 200px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.actor {
+  font-size: 14px;
+}
+
+.nameA {
+  font-size: 24px;
+}
+
+.userR {
+  font-size: 16px;
+  color: rgba(179, 0, 0, 0.8);
+  font-weight: bolder; 
+}
+
+.ageR {
+	font-size: 20px;
+	line-height: 56px;	
+	color: #ffffff;
+  margin-top: 25px;
+}
+
+.ageR span {
+	padding: 8px 16px;
+	background: rgba(179, 0, 0, 0.8);
+  margin-left: 25px;
+}
+
+.geners {
+  display: inline-block;
+  margin-left: 10px;
+}
+
+.buttime {
+  display: inline-block;
+  margin-right: 10px;
+
+    border-radius: 4px;
+
+    padding: 3px 5px;
+
+    border: 1px solid #ffffff;
+    background-color: rgb(83, 0, 0);
+    cursor: pointer;
+
+    font-size: 20px;
+    color: #ffffff;
+}
+
+.butfilm, .filmname {
+  display: inline-block;
+}
+
+.filmname {
+  font-size: 50px;
+}
+
+.filmsname {
+  font-size: 50px;
+  margin-top: 60px;
+}
+
+.date {
+  margin-top: 25px;
+}
+
+
+
+.filmbody {
+
+  padding-left: 400px;
+  padding-right: 400px;
+  padding-top: 200px;
+  background-color: rgb(11, 11, 11);
+}
+
+.popcorn {
+  font-size: 100px;
+  margin-left: 60px;
+  -webkit-text-stroke: 5px rgba(179, 0, 0, 0.8);
+}
+
+.todayprok {
+  font-size: 40px;
+  margin-left: 60px;
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.descr {
+  margin-left: 25px;
+}
+
+.date {
+  font-size: 20px;
+}
+
+.inf {
+  margin-left: 25px;
+  margin-top: 25px;
+  font-size: 25px;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #000;
+    background-color: rgb(11, 11, 11);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  
+
+  .butDeb, .butfilm { 
+    border-radius: 4px;
+    display:grid ;
+    padding: 3px 5px;
+    width: 15vw;
+    height: 30px;
+
+    border: 1px solid #ffffff;
+    background-color: rgba(179, 0, 0);
+    cursor: pointer;
+    margin-top: 5px;
+
+    font-family: inherit;
+    font-size: 20px;
+    color: #ffffff;
+  }
+
+  .butfilm {
+    float: right;
+  }
+
+  .inpDeb { 
+    border-radius: 4px;
+    display:grid ;
+    padding: 2px 2px;
+    width: 160px;
+    height: 20px;
+
+    border: 1px solid #1204d0;
+    background-color: #ffffff;
+    cursor: auto;
+    margin-top: 5px;
+
+    font-family: inherit;
+    font-size: 16px;
+    color: #000000;
+  }
+
+
+
+  
+
+  .Back:hover, .Delete:hover, .buttonwhite:hover, .buttonblack:hover, .butDeb:hover, .vixod:hover {
+    box-shadow: 1px 1px 2px 2px rgba(0, 0, 255, .2);
+  }
+
+  .Back:active, .Delete:active, .buttonwhite:active, .buttonblack:active, .butDeb:active, .vixod:active {
+    box-shadow: 1px 1px 4px 4px rgba(0, 0, 255, .2);
+  }
+
+  
+  
