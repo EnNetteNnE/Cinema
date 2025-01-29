@@ -110,9 +110,6 @@ div {
   background-color: rgb(11, 11, 11);
 }
 
-.formpay {
-  background-color: rgb(99, 99, 99);
-}
 
 .popcorn {
   font-size: 100px;
@@ -150,7 +147,44 @@ body {
   * {
     box-sizing: border-box;
   }
-  
+
+
+  .formpay {
+    max-width: 50%;
+    padding: 15px;
+    margin-top: 50px;
+    background-color: #ffffff;
+  }
+
+  .black {
+    color: #000;
+    margin-bottom: 20px;
+    font-size: 28px;
+  }
+
+  .input {
+    display: block;
+    width: 100%;
+    padding: 8px 10px;
+    margin-bottom: 10px;
+    
+    
+    border: 1px solid #1204d0;
+    background-color: #ffffff;
+    font-family: inherit;
+    font-size: 16px;
+  }
+
+  .bill {
+    margin-bottom: 20px;
+    margin-top: 20px;
+    font-size: 24px;
+  }
+
+  .b {
+    margin-top: 10px;
+  }
+
 
   .butDeb, .butfilm { 
     border-radius: 4px;
@@ -167,6 +201,25 @@ body {
     font-family: inherit;
     font-size: 20px;
     color: #ffffff;
+  }
+
+  .butpay {
+    border-radius: 4px;
+    display:grid ;
+    padding: 3px 5px;
+    width: 100%;
+    height: 40px;
+
+    background-color: rgb(8, 170, 0);
+    cursor: pointer;
+    margin-top: 5px;
+
+    font-family: inherit;
+    font-size: 20px;
+    color: #ffffff;
+
+    align-items: center;
+    justify-content: center;
   }
 
   .butfilm {
