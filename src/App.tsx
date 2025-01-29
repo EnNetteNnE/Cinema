@@ -11,12 +11,12 @@ const App = () => {
   const [cinemafilm, setCinemafilm] = useState(cinemaFilm(cinematoday.films[0].id))
   const [cinematime, setCinematime] = useState(cinemaTime(cinematoday.films[0].id))
   const [cinemahall, setCinemahall] = useState(cinemaTime(cinematoday.films[0].id).schedules[0].seances[0].hall)
+  const [cell, setCell] = useState({date: '', time: '', hall: '', row: 0, column: 0, price: 0})
 
   const intoFilm = ( id: string ) => {
     setCinemafilm(cinemaFilm(id))
     setCinematime(cinemaTime(id))
     setStatestr('film')
-    console.log(id)
   }
 
   const back = () => {
@@ -27,7 +27,11 @@ const App = () => {
     setStatestr('film')
   }
 
-  const hall = (hall: {
+  const back2 = () => {
+    setStatestr('hall')
+  }
+
+  const hall = (date: string, time: string, hall: {
     name: string,
     places: [
       [
@@ -38,16 +42,150 @@ const App = () => {
       ]
     ]
   }) => {
+    setCell({date: date, time: time, hall: hall.name, row: 0, column: 0, price: 0})
     setStatestr('hall')
     setCinemahall(hall)
   }
 
   const formToPay = (row: number, column: number, price: number) => {
-    console.log(price)
-    if (price === 0) {}
-    else {
+    if (price !== 0) {
+      setCell({date: cell.date, time: cell.time, hall: cell.hall, row: row, column: column, price: price})
       setStatestr('form')
     }
+  }
+  
+  
+  const [firstname, setFirstname] = useState('')
+  const [firstnameDirty, setFirstnameDirty] = useState(false)
+  const [firstnameError, setFirstnameError] = useState('Имя не может быть пустым')
+
+  const [lastname, setLastname] = useState('')
+  const [lastnameDirty, setLastnameDirty] = useState(false)
+  const [lastnameError, setLastnameError] = useState('Фамилия не может быть пустым')
+
+  const [phone, setPhone] = useState('')
+  const [phoneDirty, setPhoneDirty] = useState(false)
+  const [phoneError, setPhoneError] = useState('Телефон не может быть пустым')
+  
+  const [pan, setPan] = useState('')
+  const [panDirty, setPanDirty] = useState(false)
+  const [panError, setPanError] = useState('Номер карты не может быть пустым')
+  
+  const [expireDate, setExpireDate] = useState('')
+  const [expireDateDirty, setExpireDateDirty] = useState(false)
+  const [expireDateError, setExpireDateError] = useState('Срок действия не может быть пустым')
+
+  const [cvv, setCvv] = useState('')
+  const [cvvDirty, setCvvDirty] = useState(false)
+  const [cvvError, setCvvError] = useState('cvv не может быть пустым')
+  const [formValid, setFormValid] = useState(false)
+
+  useEffect(() => {
+    if (cvvError || expireDateError || panError || firstnameError || lastnameError || phoneError) {
+      setFormValid(false)
+    } else {
+      setFormValid(true)
+    }
+  }, [cvvError, expireDateError, panError, firstnameError, lastnameError, phoneError])
+
+  const firstnameHandler = (e: any) => {
+    setFirstname(e.target.value)
+      if(!e.target.value) {
+        setFirstnameError('Имя не может быть пустым')
+      }
+    else {
+      setFirstnameError('')
+    }
+  }
+
+  const lastnameHandler = (e: any) => {
+    setLastname(e.target.value)
+      if(!e.target.value) {
+        setLastnameError('Фамилия не может быть пустым')
+      }
+    else {
+      setLastnameError('')
+    }
+  }
+
+  const phoneHandler = (e: any) => {
+    setPhone(e.target.value)
+    if (e.target.value.length != 11) {
+      setPhoneError('Номер телефона должен состоять из 11 цифр')
+      if(!e.target.value) {
+        setPhoneError('Телефон не может быть пустым')
+      }
+    } else {
+      setPhoneError('')
+    }
+  }
+
+  const cvvHandler = (e: any) => {
+    setCvv(e.target.value)
+    if (e.target.value.length != 3) {
+      setCvvError('cvv должен состоять из 3 цифр')
+      if(!e.target.value) {
+        setCvvError('cvv не может быть пустым')
+      }
+    } else {
+      setCvvError('')
+    }
+  }
+
+  const panHandler = (e: any) => {
+    setPan(e.target.value)
+    if (e.target.value.length != 9) {
+      setPanError('Номер карты должен состоять из 8 цифр в формате nnnn nnnn')
+      if(!e.target.value) {
+        setPanError('Номер карты не может быть пустым')
+      }
+    } else {
+      setPanError('')
+    }
+  }
+  
+  const expireDateHandler = (e: any) => {
+    setExpireDate(e.target.value)
+    if (e.target.value.length != 5) {
+      setExpireDateError('Срок действия должен выглядеть как дд/мм')
+      if(!e.target.value) {
+        setExpireDateError('Срок действия не может быть пустым')
+      }
+    } else {
+      setExpireDateError('')
+    }
+  }
+
+  const blurHeader = (e: any) => {
+    switch (e.target.name) {
+      case 'cvv':
+        setCvvDirty(true)
+        break
+      case 'pan':
+        setPanDirty(true)
+        break
+      case 'expireDate':
+        setExpireDateDirty(true)
+        break
+      case 'firstname':
+        setFirstnameDirty(true)
+        break
+      case 'lastname':
+        setLastnameDirty(true)
+        break
+      case 'phone':
+        setPhoneDirty(true)
+        break
+    }
+  }
+
+  const entrance = () => { //кнопочка входа
+    setCvv('')
+    setPan('')
+    setExpireDate('')
+    setFirstname('')
+    setLastname('')
+    setPhone('')
   }
 
   if (statestr == 'main') {
@@ -135,7 +273,7 @@ const App = () => {
             <p className='date'>{date.date}</p>
             <br></br>
             {date.seances.map(t =>
-              <button onClick={() => hall(t.hall)} className='buttime'>{t.time}</button>
+              <button onClick={() => hall(date.date, t.time, t.hall)} className='buttime'>{t.time}</button>
             )}
           </div>
         )}
@@ -144,7 +282,6 @@ const App = () => {
     </p>
   );
   }
-
 
   if (statestr == 'hall') {
     return (
@@ -175,20 +312,50 @@ const App = () => {
       </p>
     )}
 
-
-
     if (statestr == 'form') {
       return (
         <p className = "filmbody">
-          <p className='formpay'>
+          <button onClick={() => back2()} className="butfilm">отмена</button>
+          
 
-          </p>
+          <h1 className='filmname'>{cinemafilm.film.name}</h1>
+          <div className='bill'>
+            <p className='b'>{'Дата: '+cell.date}</p>
+            <p className='b'>{'Время: '+cell.time}</p>
+            <p className='b'>{'Зал: '+cell.hall}</p>
+            <p className='b'>{'Ряд: '+cell.row}</p>
+            <p className='b'>{'Место: '+cell.column}</p>
+            <p className='b'>{'Стоимость билета: '+cell.price+' руб.'}</p>
+          </div> 
+
+          <div className='formpay'>
+          <div className='black'>Форма оплаты</div>
+
+          {(firstnameDirty && firstnameError) && <div style={{color:'red'}}>{firstnameError}</div>}
+          <input className='input' onChange={e => firstnameHandler(e)} value={firstname} onBlur={e => blurHeader(e)} name='firstname' type="text" placeholder="Введите имя..."/>
+          {(lastnameDirty && lastnameError) && <div style={{color:'red'}}>{lastnameError}</div>}
+          <input className='input' onChange={e => lastnameHandler(e)} value={lastname} onBlur={e => blurHeader(e)} name='lastname' type="text" placeholder="Введите фамилию..."/>
+          {(phoneDirty && phoneError) && <div style={{color:'red'}}>{phoneError}</div>}
+          <input className='input' onChange={e => phoneHandler(e)} value={phone} onBlur={e => blurHeader(e)} name='phone' type="text" placeholder="Введите номер телефона..."/>
+
+          <div className='black'>Данные карты</div>
+
+          {(panDirty && panError) && <div style={{color:'red'}}>{panError}</div>}
+          <input className='input' onChange={e => panHandler(e)} value={pan} onBlur={e => blurHeader(e)} name='pan' type="text" placeholder="Введите номер карты в формате nnnn nnnn..."/>
+          
+          {(expireDateDirty && expireDateError) && <div style={{color:'red'}}>{expireDateError}</div>}
+          <input className='input' onChange={e => expireDateHandler(e)} value={expireDate} onBlur={e => blurHeader(e)} name='expireDate' type="text" placeholder="Введите срок действия карты в формате дд/мм..."/>
+
+          {(cvvDirty && cvvError) && <div style={{color:'red'}}>{cvvError}</div>}
+          <input className='input' onChange={e => cvvHandler(e)} value={cvv} onBlur={e => blurHeader(e)} name='cvv' type="text" placeholder="Введите cvv код..."/>
+
+          <button className='butpay' onClick={() => entrance()} disabled={!formValid} type='submit'>{'Оплатить '+cell.price+' руб.'}</button>
+
+          </div>
           <p className='bottom'></p>
   
         </p>
     )}
-
-
 
   return (
     <div className="game">
